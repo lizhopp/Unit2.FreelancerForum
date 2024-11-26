@@ -1,38 +1,70 @@
+const freelancers = [];
 
+class Freelancer {
+  name;
+  occupation;
+  startingPrice;
+  constructor(name, occupation, startingPrice) {
+    this.name = name;
+    this.occupation = occupation;
+    this.startingPrice = startingPrice;
+  }
+}
+
+function makeTableHeadings(table, ...headerText) {
+  const tr = document.createElement("tr");
+  for (let header of headerText) {
+    const th = document.createElement("th");
+    th.textContent = header;
+    tr.appendChild(th);
+  }
+  table.appendChild(tr);
+}
+
+function makeTableRow(table, ...textContent) {
+  const row = document.createElement("tr");
+  for (let text of textContent) {
+    makeTableCell(row, text);
+  }
+  table.append(row);
+}
+
+function makeTableCell(tableRow, content) {
+  const cell = document.createElement("td");
+  cell.textContent = content;
+  tableRow.append(cell);
+}
 
 function init() {
   /**
    * 👉 STEP 1: Grab the div with the id of "root"
    */
+  const rootContainer = document.getElementById("root");
+
+
   /**
    * 👉 STEP 2:
-   *    Create a new h1 element that says "Pets"
+   *    Create a new h1 element that says "Freelancer Forum"
    *    Add the new h1 to the root div
    */
+  const heading = document.createElement("h1");
+  heading.textContent = "Freelancer Forum";
+  rootContainer.appendChild(heading);
   /**
    * 👉 STEP 3:
-   *    Create a table to hold our pets in
+   *    Create a table to hold our Freelancers in
    */
-  /**
-   * 👉 STEP 5:
-   *    Call the function you created in step 4
-   */
+
+  const table = document.createElement("table");
+  rootContainer.append(table);
+
+  makeTableHeadings(table, "Name", "Occupation", "Starting Price");
+  for(freelancer in freelancers){
+    makeTableRow(table, freelancer.name, freelancer.occupation, freelancer.startingPrice);
+  }
+
 }
+setInterval(() => {freelancers.push(new Freelancer("Alice", "Writer", "$30")); init();}, 1000);
+setInterval(() => {freelancers.push(new Freelancer("Bob", "Teacher", "$50")); init();}, 1000);
+setInterval(() => {freelancers.push(new Freelancer("Carol", "Programmer", "$70")); init();}, 1000);
 
-/**
- * 👉 STEP 4:
- *    Create a function to render the pets in our pets array
- */
-
-/**
- * 👉 STEP 6:
- *    Create a function to add a new pet to the pets array
- */
-
-/**
- * 👉 STEP 7:
- *    Add an interval to add a new pet every second
- */
-
-//call init function
-init();
