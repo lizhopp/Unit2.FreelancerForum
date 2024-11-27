@@ -35,6 +35,13 @@ function makeTableCell(tableRow, content) {
   tableRow.append(cell);
 }
 
+function update(){
+  const table = document.querySelector("table")
+  freelancers.forEach(freelancer =>{
+    makeTableRow(table, freelancer.name, freelancer.occupation, freelancer.startingPrice)
+  })
+}
+
 function init() {
   /**
    * 👉 STEP 1: Grab the div with the id of "root"
@@ -64,7 +71,8 @@ function init() {
   }
 
 }
-setInterval(() => {freelancers.push(new Freelancer("Alice", "Writer", "$30")); init();}, 1000);
-setInterval(() => {freelancers.push(new Freelancer("Bob", "Teacher", "$50")); init();}, 1000);
-setInterval(() => {freelancers.push(new Freelancer("Carol", "Programmer", "$70")); init();}, 1000);
+init();
+setInterval(() => {freelancers.push(new Freelancer("Alice", "Writer", "$30")); update();}, 1000);
+setInterval(() => {freelancers.push(new Freelancer("Bob", "Teacher", "$50")); update();}, 2000);
+setInterval(() => {freelancers.push(new Freelancer("Carol", "Programmer", "$70")); update();}, 3000);
 
