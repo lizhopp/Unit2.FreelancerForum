@@ -1,5 +1,6 @@
 const freelancers = [];
-
+let total = 0;
+let average = 0;
 class Freelancer {
   name;
   occupation;
@@ -38,8 +39,12 @@ function makeTableCell(tableRow, content) {
 function update(){
   const table = document.querySelector("table")
   freelancers.forEach(freelancer =>{
+    total += freelancer.startingPrice * 1.0
     makeTableRow(table, freelancer.name, freelancer.occupation, freelancer.startingPrice)
   })
+  average = total / freelancers.length
+  document.querySelector("h2").textContent = average;
+
 }
 
 function init() {
@@ -57,6 +62,9 @@ function init() {
   const heading = document.createElement("h1");
   heading.textContent = "Freelancer Forum";
   rootContainer.appendChild(heading);
+  const h2 = document.createElement("h2");
+  h2.textContent = average;
+  rootContainer.append(h2)
   /**
    * 👉 STEP 3:
    *    Create a table to hold our Freelancers in
@@ -70,9 +78,11 @@ function init() {
     makeTableRow(table, freelancer.name, freelancer.occupation, freelancer.startingPrice);
   }
 
+
+
 }
 init();
-setInterval(() => {freelancers.push(new Freelancer("Alice", "Writer", "$30")); update();}, 1000);
-setInterval(() => {freelancers.push(new Freelancer("Bob", "Teacher", "$50")); update();}, 2000);
-setInterval(() => {freelancers.push(new Freelancer("Carol", "Programmer", "$70")); update();}, 3000);
+setInterval(() => {freelancers.push(new Freelancer("Alice", "Writer", 30)); update();}, 1000);
+setInterval(() => {freelancers.push(new Freelancer("Bob", "Teacher", 50)); update();}, 2000);
+setInterval(() => {freelancers.push(new Freelancer("Carol", "Programmer", 70)); update();}, 3000);
 
